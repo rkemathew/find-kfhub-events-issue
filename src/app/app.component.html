@@ -1,0 +1,37 @@
+
+<form class="sandbox-customize" [formGroup]="customizeForm">
+  <div>
+      <label kf-text for="label">Label</label>
+      <kf-input id="label" formControlName="label"></kf-input>
+  </div>
+  <div>
+      <label kf-text for="placeholder">Placeholder</label>
+      <kf-input id="placeholder" formControlName="placeholder"></kf-input>
+  </div>
+  <div>
+      <label kf-text for="type">Type</label>
+      <kf-dropdown id="type" formControlName="type">
+          <kf-dropdown-item value="'textarea'" label="Text Area"></kf-dropdown-item>
+          <kf-dropdown-item value="" label="Default"></kf-dropdown-item>
+      </kf-dropdown>
+  </div>
+  <div>
+      <label kf-text for="disabled">Disabled</label>
+      <kf-checkbox id="disabled" formControlName="disabled"></kf-checkbox>
+  </div>
+</form>
+<form class="sandbox-preview" [formGroup]="previewForm">
+  <kf-input
+    [disabled]="customizeForm.value.disabled"
+    [label]="customizeForm.value.label"
+    [type]="customizeForm.value.type"
+    formControlName="input"
+    [placeholder]="customizeForm.value.placeholder"
+  ></kf-input>
+
+  <kf-input
+    type="textarea"
+    rows="3"
+    grow="true"
+  ></kf-input>
+</form>

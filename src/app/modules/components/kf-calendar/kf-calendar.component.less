@@ -1,0 +1,73 @@
+@import '../../shared/_kfcore-less/app';
+
+::ng-deep button {
+    .button {
+        min-width: 0;
+    }
+}
+
+.card {
+    display: inline-block;
+}
+
+header {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
+    .arrow {
+        cursor: pointer;
+
+        &.left {
+            .rotate(90deg);
+        }
+
+        &.right {
+            .rotate(-90deg);
+        }
+    }
+
+    span {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+table {
+    margin: 16px 0;
+    table-layout: fixed;
+
+    th, td {
+        padding: 8px;
+        text-align: center;
+    }
+
+    td {
+        cursor: pointer;
+
+        &.disabled {
+            color: @grey;
+            cursor: not-allowed;
+        }
+
+        &.selected {
+            background: @primary-color;
+            border-radius: 50%;
+        }
+    }
+}
+
+footer {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+
+    button {
+        flex: 1;
+        margin: 0;
+
+        &:first-child {
+            margin-right: 8px;
+        }
+    }
+}

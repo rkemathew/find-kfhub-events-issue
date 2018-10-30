@@ -1,0 +1,123 @@
+@import '../../shared/_kfcore-less/app';
+
+:host {
+  display: inline-block;
+  min-width: 287px;
+  box-sizing: border-box;
+
+  &.kf-input-size-lg {
+    input {
+      font-size: 36px;
+      padding: 2px 8px;
+    }
+  }
+
+  &[type="search"] {
+    position: relative;
+
+    kf-icon {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0 8px;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    input {
+      padding-left: 36px;
+    }
+  }
+
+  &[type="date"] {
+    position: relative;
+
+    kf-icon {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 0 8px;
+      pointer-events: none;
+      user-select: none;
+    }
+  }
+
+  &.ng-invalid {
+    &.ng-touched {
+      input {
+        border-color: @red;
+        background: @pink;
+      }
+    }
+  }
+}
+
+input {
+  padding: @small-padding @default-padding;
+}
+
+textarea {
+  padding: @default-padding;
+}
+
+input,
+textarea {
+  background: @white;
+  border: 1px solid fade(@grey, 30);
+  color: @black;
+  
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: @default-font-family;
+
+  &::placeholder {
+    color: @medium-grey;
+  }
+
+  &:hover {
+    border-color: fade(@blue, 40);
+  }
+
+  &:focus {
+    box-shadow: 0 0 5px 1px fade(@blue, 60);
+    border-color: fade(@blue, 60);
+    outline: 0;
+  }
+
+  &:disabled {
+    background: @silver-30;
+    border-color: fade(@black, 10);
+    color: @medium-grey;
+  }
+}
+
+label {
+  width: 100%;
+  margin-bottom: @smaller-padding;
+}
+
+textarea {
+  resize: none;
+}
+
+.calendar {
+    position: absolute;
+    top: 52px;
+    z-index: 1;
+}
+
+.date-input {
+    cursor: pointer;
+}
+
+.no-border {
+  border: 1px solid transparent;
+}
+
+.error {
+  border-color: @red;
+  background: @pink;
+}

@@ -1,0 +1,217 @@
+@import './variables';
+
+body, html {
+    height: 100%;
+    
+    &.modal-open {
+        overflow: hidden;
+    }
+}
+
+//global custom webkit-scrollbar style
+::-webkit-scrollbar-track {
+    border-radius: 50px;
+    background-color: @white;
+}
+
+::-webkit-scrollbar {
+    width: @scrollbar-size;
+    height: @scrollbar-size;
+    background-color: @white;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+    background-color: @scrollbar-sliver;
+}
+
+kf-root {
+    // ==== kf-page-masthead styles
+    kf-page-masthead {
+        h2 {
+            margin-bottom: @masthead-title-spacing;
+        }
+    }
+
+    // === kf-card styles
+    kf-card {
+        [kf-card-header] {
+            margin: 0 -@card-padding @card-padding;
+            padding: 0 @card-padding @default-element-spacing;
+            border-bottom: @solid-stroke;
+            & > :first-child {
+                margin-top: 0;
+            }
+        }
+        & > :first-child {
+            margin-top: 0;
+        }
+        & > :last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+body {
+    // ==== Slider Dialog Styles ====
+    .ui-sidebar {
+        height: 100vh;
+        background-size: cover;
+        padding: 0;
+
+        &.ui-sidebar-right {
+            width: 660px;
+            padding: 90px;
+
+            .slider-backdrop {
+                background: none;
+            }
+
+            .slider-content {
+                width: 100%;
+
+                .slider-body {
+                    overflow: hidden;
+                }         
+            }
+        }
+
+        kf-card {
+            margin: 0;
+            min-height: 420px;
+        }
+
+        .ui-sidebar-close {
+            display: none;
+        }
+    }
+
+    // ==== Modal Dialog Styles ====
+    .ui-dialog {
+        background-color: @white;
+        box-shadow: 0 2px 4px 0 fade(@black, 20);
+        // box-shadow: none;
+        border-radius: 0;
+        padding: 40px;
+
+        &.ui-widget {
+            .ui-dialog-content {
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+                overflow: visible;
+            }
+        }
+        footer {
+            display: flex;
+            justify-content: flex-end;
+            flex: 0 0 auto;
+            padding-top: 32px;
+
+            [kf-button] {
+                margin: 0 0 0 8px;
+            }
+        }
+    }
+    .ui-dialog-titlebar-close {
+        display: none;
+    }
+    .ui-widget-overlay {
+        background: fade(@black, 50);
+    }
+
+    .ui-tabview {
+        padding: 4px 4px 4px 0;
+    
+        .ui-tabview-nav {
+            & > li.ui-state-default {
+                background-color: transparent;
+                border: 0;
+                margin-right: 40px;
+                border-bottom: 2px solid transparent;
+                font-size: 12px;
+                font-weight: bold;
+                letter-spacing: 2px;
+            }
+    
+            & > li.ui-state-default:hover {
+                // background-color: @white;
+                border-bottom: 2px solid @black;
+            }
+    
+            & > li.ui-state-active {
+                border-bottom: 2px solid @black;
+            }
+
+            & li a {
+                padding: 8px 8px 8px 0;
+            }
+        }
+    
+        .ui-tabview-panel {
+            padding: 8px 16px 16px 0;
+        }
+    }
+
+    // ==== p-menu overrides
+    .ui-menu {
+        padding: 0;
+        
+        &.ui-widget-content {
+            background: @white;
+            border-radius: 0;
+        }
+
+        .ui-menuitem {
+            padding: @input-padding;
+            border-radius: 0;
+            margin: 0;
+            cursor: pointer;
+
+            &:hover {
+                background: @dark-blue;
+                * {
+                    color: @white;
+                }
+            }
+
+            & > .ui-menuitem-link {
+                padding: 0;
+
+                &:hover {
+                    background: none;
+                }
+            }
+        }
+    }
+
+    // ==== tooltip overrides
+    .ui-tooltip {
+        max-width: 275px;
+
+        .ui-tooltip-arrow {
+            border-top-color: @white;
+            bottom: -2px;
+            margin-left: -.55em;
+            border-width: .55em .55em 0;
+            margin-bottom: @smaller-margin;
+        }
+
+        .ui-tooltip-text {
+            /* Font styling taken from kf-text */
+            font: @default-font-weight @small-body-size @default-font-family;
+            color: @grey;
+            letter-spacing: 0.4px;
+            line-height: 20px;
+            text-align: center;
+
+            /* background styling */
+            background: @white; 
+            padding: @small-padding;
+            margin-bottom: @smaller-margin;
+            box-shadow: @default-box-shadow;
+            border-radius: 0;
+        }
+    }
+}

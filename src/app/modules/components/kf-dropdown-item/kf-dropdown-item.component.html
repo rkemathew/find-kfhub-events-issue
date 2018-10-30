@@ -1,0 +1,19 @@
+<div
+  class="item"
+  [class.multiselect]="hasCheckbox"
+  [class.selected]="selected"
+  [class.visible]="visible"
+  [class.disabled]="disabled"
+  (click)="click()"
+  (mouseenter)="hover(true)"
+  (mouseleave)="hover(false)"
+>
+  <div class="item-top-row">
+    <kf-checkbox class="checkbox" *ngIf="hasCheckbox" [(ngModel)]="selected"></kf-checkbox>
+    <kf-icon class="icon" [icon]="icon" *ngIf="icon"></kf-icon>
+    <span kf-text [color]="getTextColor()">{{ label }}</span>
+  </div>
+  <div class="item-bottom-row" *ngIf="description">
+    <span kf-text color="medium" size="sm">{{ description }}</span>
+  </div>
+</div>

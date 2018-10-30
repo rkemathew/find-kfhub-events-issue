@@ -1,0 +1,152 @@
+@import '../../shared/_kfcore-less/variables';
+
+:host {
+    font: @default-font-weight @body-size @default-font-family;
+    letter-spacing: 0.4px;
+    line-height: 20px;
+    text-align: left;
+
+    &.color-light {
+        color: @white;
+    }
+
+    &.color-medium {
+        color: @grey;
+    }
+
+    &.color-dark {
+        color: @black;
+    }
+
+    &.color-primary {
+        color: @blue;
+    }
+
+    &.color-success {
+        color: @green;
+    }
+
+    &.color-error {
+        color: @red;
+    }
+
+    &.size-sm {
+        font-size: @small-body-size;
+        line-height: 18px;
+    }
+
+    &.size-xs {
+        font-size: @extra-small-body-size;
+        line-height: 16px;
+    }
+
+    &.weight-heavy {
+        font-weight: @emphatic-font-weight;
+    }
+
+    &.weight-strong {
+        font-weight: @strong-font-weight;
+    }
+
+    &.transform-uppercase {
+        text-transform: uppercase;
+    }
+
+    &.transform-capitalize {
+        text-transform: capitalize;
+    }
+
+    &.utility {
+        letter-spacing: 1.5px;
+    }
+
+    &.nav {
+        letter-spacing: 2px;
+    }
+
+    &.sub-nav {
+        letter-spacing: 0.5px;
+    }
+
+    &h1 {
+        font-size: @h1-size;
+        font-weight: @strong-font-weight;
+        letter-spacing: 0.5px;
+        line-height: 40px;
+
+        &.size-sm {
+            font-size: @h2-size;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            line-height: 38px;
+        }
+    }
+
+    &h2 {
+        font-size: @h2-size;
+        font-weight: @strong-font-weight;
+        letter-spacing: 0.5px;
+        line-height: normal;
+
+        &.transform-uppercase {
+            letter-spacing: 1.5px;
+            line-height: 38px;
+        }
+    }
+
+    &h3 {
+        font-size: @h3-size;
+        font-weight: @strong-font-weight;
+        letter-spacing: 0.5px;
+        line-height: 40px;
+    }
+
+    &h4 {
+        font-size: @h4-size;
+        font-weight: normal;
+        letter-spacing: 0.5px;
+        line-height: 20px;
+        
+        &.weight-heavy {
+            font-weight: @strong-font-weight;
+        }
+    }
+
+    &label {
+        font-size: @small-body-size;
+        font-weight: @emphatic-font-weight;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.5;
+        letter-spacing: 0.2px;
+        text-align: left;
+        color: @black;
+        text-transform: capitalize;
+    }
+
+    &th {
+        font-size: @small-body-size;
+        text-transform: uppercase;
+        color: @blue;
+        font-weight: @strong-font-weight;
+        line-height: 1.5;
+        letter-spacing: 1.5px;
+        padding: @input-padding;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+    
+    &a {
+        font-weight: @emphatic-font-weight;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.5;
+        letter-spacing: .5px;
+        text-align: left;
+        color: @blue;
+    }
+}
+
+:host-context([kf-button]) {
+    text-align: center;
+}

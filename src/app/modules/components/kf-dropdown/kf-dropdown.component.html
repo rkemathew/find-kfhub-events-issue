@@ -1,0 +1,18 @@
+<label *ngIf="label" kf-text [color]="textColor" (click)="isOpen = !isOpen">{{ label }}</label>
+<div class="dropdown" [ngClass]="getClasses()">
+    <button (click)="isOpen = !isOpen" [disabled]="disabled">
+        <span kf-text [color]="getTextColor()">{{ getText() }}</span>
+        <kf-icon 
+        	class="icon" 
+        	icon="arrow-down" 
+        	[color]="getIconColor()" 
+        	size="xs"
+        ></kf-icon>
+    </button>
+    <div class="items" [class.open]="isOpen" [ngClass]="{'align-right': !withinViewport()}" #itemsGroup>
+        <ng-content select="kf-dropdown-item"></ng-content>
+    </div>
+</div>
+<div *ngIf="isInvalid" kf-text size="sm" weight="heavy" class="required-text">
+    {{ 'required' }}
+</div>

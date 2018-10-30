@@ -1,0 +1,58 @@
+<label *ngIf="label" kf-text>{{ label }}</label>
+
+<div [ngSwitch]="type">
+    <textarea
+      #textarea
+      kf-text
+      *ngSwitchCase="'textarea'"
+      [style.resize]="resize"
+      [(ngModel)]="value"
+      (blur)="onBlur()"
+      [maxlength]="maxlength"
+      [disabled]="disabled"
+      [placeholder]="placeholder || ''"
+      [ngClass]="getStyle()"
+      [rows]="rows"
+      (keyup)="autoGrowTextArea(grow)"
+    ></textarea>
+    <input
+      kf-text
+      class="date-input"
+      *ngSwitchCase="'date'"
+      [disabled]="disabled"
+      [placeholder]="placeholder || ''"
+      type="text"
+      [ngModel]="displayDate"
+      (blur)="onBlur()"
+      (focus)="onFocus()"
+      [maxlength]="maxlength"
+      [readonly]="true"
+    />
+    <input
+      kf-text
+      *ngSwitchDefault
+      [disabled]="disabled"
+      [placeholder]="placeholder || ''"
+      [type]="type"
+      [(ngModel)]="value"
+      [ngClass]="getStyle()"
+      (blur)="onBlur()"
+      (focus)="onFocus()"
+      [maxlength]="maxlength"
+    />
+</div>
+
+<kf-icon icon="date-picker" color="primary" *ngIf="type === 'date'"></kf-icon>
+<kf-icon icon="search" color="primary" *ngIf="type === 'search'"></kf-icon>
+<kf-icon icon="danger" color="danger" *ngIf="errorKeys"></kf-icon>
+<kf-error type="inline" *ngIf="displayError && errors && touched" [errors]="errors"></kf-error>
+
+<kf-calendar
+  class="calendar"
+  *ngIf="type === 'date' && showCalendar"
+  [(date)]="selectedDate"
+  [locale]="locale"
+  (clearClick)="clearDate()"
+  (applyClick)="applyDate($event)"
+  [canSelectDate]="canSelectDate"
+></kf-calendar>

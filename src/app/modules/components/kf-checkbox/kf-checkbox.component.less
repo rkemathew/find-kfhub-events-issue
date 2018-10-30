@@ -1,0 +1,27 @@
+@import '../../shared/_kfcore-less/app';
+
+:host {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.checkbox {
+    @size: 20px;
+
+    background: @white;
+    border: solid 1px @grey;
+    box-sizing: border-box;
+    cursor: pointer;
+    height: @size;
+    margin: 0;
+    width: @size;
+}
+
+label {
+    margin: 0 8px;
+}
+
+.disable {
+    cursor: not-allowed;
+}

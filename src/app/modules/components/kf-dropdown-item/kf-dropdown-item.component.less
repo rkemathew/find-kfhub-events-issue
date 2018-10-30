@@ -1,0 +1,49 @@
+@import '../../shared/_kfcore-less/app';
+
+.item {
+    align-items: flex-start;
+    cursor: pointer;
+    display: none;
+    padding: 12px 24px 12px 12px;
+
+    &.visible {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &.selected {
+        background: fade(@blue, 15%);
+    }
+
+    &.disabled {
+        cursor: not-allowed;
+    }
+
+    &:hover {
+        background: @dark-blue;
+        * {
+            color: @white;
+        }
+    }
+
+    .checkbox {
+        margin: 0 8px 0 0;
+    }
+
+    .icon {
+        margin: 0 8px 0 0;
+    }
+
+    .item-top-row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding-bottom: @smallest-padding;
+    }
+    .item-bottom-row {
+        display: flex;
+        flex-direction: row;
+        padding-left: 28px;
+    }
+
+}

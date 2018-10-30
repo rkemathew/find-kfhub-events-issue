@@ -1,0 +1,95 @@
+@import './app';
+@import './fonts/kf-icons/variables';
+@width: 413px !important;
+
+.ui-growl {
+  width: @width;
+  // .ui-growl-item-container.ui-state-highlight.ui-growl-message-success
+  .ui-growl-item-container {
+    width: @width;
+    border-radius: 2px;
+    background-color: @white !important;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    color: @black;
+    box-sizing: border-box;
+    padding: 20px;
+    border-left: 8px solid transparent;
+    opacity: 1;
+    
+    &.ui-growl-message-success {
+      border-color: @dark-green;
+
+      .ui-growl-image {
+        &:before {
+          content: @kf-icon-check-line;
+          color: @dark-green;
+        }
+      }
+    }
+    &.ui-growl-message-info {
+      border-color: @blue;
+
+      .ui-growl-image {
+        &:before {
+          content: @kf-icon-check-line;
+          color: @blue;
+        }
+      }
+    }
+    &.ui-growl-message-warn {
+      border-color: @dark-blue;
+
+      .ui-growl-image {
+        &:before {
+          content: @kf-icon-check-line;
+          color: @dark-blue;
+        }
+      }
+    }
+    &.ui-growl-message-error {
+      border-color: @red;
+
+      .ui-growl-image {
+        &:before {
+          content: @kf-icon-check-line;
+          color: @red;
+        }
+      }
+    }
+  }
+  
+  .ui-growl-item {
+    padding: 0;
+    display: flex;
+    align-items: center;
+  }
+
+  .ui-growl-icon-close {
+    position: static;
+    order: 100;
+    font-family: 'kf-icons';
+    font-size: 14px;
+
+    &:before {
+      content: @kf-icon-close;
+    }
+  }
+
+  .ui-growl-image {
+    position: static;
+    font-size: 18px;
+    font-family: 'kf-icons';
+  }
+
+  .ui-growl-message {
+    padding: 0;
+    margin: 0 16px;
+    flex: 1 1 auto;
+  }
+
+  .ui-growl-title {
+
+  }
+
+
+}

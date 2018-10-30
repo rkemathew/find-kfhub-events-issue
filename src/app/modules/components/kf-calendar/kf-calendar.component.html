@@ -1,0 +1,50 @@
+<kf-card class="card">
+    <header>
+        <kf-icon
+          class="arrow left"
+          icon="arrow-down"
+          color="primary"
+          size="sm"
+          (click)="moveLeft()"
+        ></kf-icon>
+        <span kf-text size="sm" weight="heavy">{{ monthName | uppercase }}</span>
+        <kf-icon
+          class="arrow right"
+          icon="arrow-down"
+          color="primary"
+          size="sm"
+          (click)="moveRight()"
+        ></kf-icon>
+    </header>
+    <table>
+        <thead>
+            <th
+              kf-text
+              *ngFor="let name of weekdayNames"
+              color="dark"
+              size="sm"
+              weight="heavy"
+            >
+                {{ name }}
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let names of dayNames">
+                <td
+                  kf-text
+                  *ngFor="let name of names"
+                  [class.disabled]="name.disabled || !name.canSelect"
+                  [class.selected]="name.selected"
+                  size="sm"
+                  (click)="selectDate(name.date, name.disabled, name.canSelect)"
+                >
+                    {{ name.label }}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <footer>
+        <button kf-button color="light" size="sm" (click)="clear()">Clear</button>
+        <button kf-button size="sm" (click)="apply()">Apply</button>
+    </footer>
+</kf-card>
