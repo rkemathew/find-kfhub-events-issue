@@ -10,6 +10,7 @@ import { KfDropdownItemComponent } from './kf-dropdown-item/kf-dropdown-item.com
 import { KfCheckboxComponent } from './kf-checkbox/kf-checkbox.component';
 import { KfTextComponent } from './kf-text/kf-text.component';
 import { KfDropdownComponent } from './kf-dropdown/kf-dropdown.component';
+import { RonnieDummyComponent } from './ronnie-dummy/ronnie-dummy.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { KfDropdownComponent } from './kf-dropdown/kf-dropdown.component';
     KfDropdownItemComponent,
     KfCheckboxComponent,
     KfTextComponent,
+    RonnieDummyComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +41,7 @@ import { KfDropdownComponent } from './kf-dropdown/kf-dropdown.component';
     KfDropdownItemComponent,
     KfCheckboxComponent,
     KfTextComponent,
+    RonnieDummyComponent,
   ],
   providers: [],
 })

@@ -1,21 +1,41 @@
 <label *ngIf="label" kf-text>{{ label }}</label>
-
 <div [ngSwitch]="type">
-    <textarea
-      #textarea
-      kf-text
-      *ngSwitchCase="'textarea'"
-      [style.resize]="resize"
-      [(ngModel)]="value"
-      (blur)="onBlur()"
-      [maxlength]="maxlength"
-      [disabled]="disabled"
-      [placeholder]="placeholder || ''"
-      [ngClass]="getStyle()"
-      [rows]="rows"
-      (keyup)="autoGrowTextArea(grow)"
-    ></textarea>
+    <!-- When type = textarea -->
+    <div *ngSwitchCase="'textarea'">
+      <!-- When modelChangesOnEveryKeystroke = true -->
+      <textarea
+        #textarea
+        kf-text
+        *ngIf="modelChangesOnEveryKeystroke"
+        [style.resize]="resize"
+        [(ngModel)]="value"
+        (blur)="onBlur()"
+        [maxlength]="maxlength"
+        [disabled]="disabled"
+        [placeholder]="placeholder || ''"
+        [ngClass]="getStyle()"
+        [rows]="rows"
+      ></textarea>
+
+      <!-- When modelChangesOnEveryKeystroke = false -->
+      <textarea
+        #textarea
+        kf-text
+        *ngIf="!modelChangesOnEveryKeystroke"
+        [style.resize]="resize"
+        [ngModel]="value"
+        (blur)="onBlur($event)"
+        [maxlength]="maxlength"
+        [disabled]="disabled"
+        [placeholder]="placeholder || ''"
+        [ngClass]="getStyle()"
+        [rows]="rows"
+      ></textarea>
+    </div>
+
+    <!-- When type = date -->
     <input
+      #input
       kf-text
       class="date-input"
       *ngSwitchCase="'date'"
@@ -28,18 +48,37 @@
       [maxlength]="maxlength"
       [readonly]="true"
     />
-    <input
-      kf-text
-      *ngSwitchDefault
-      [disabled]="disabled"
-      [placeholder]="placeholder || ''"
-      [type]="type"
-      [(ngModel)]="value"
-      [ngClass]="getStyle()"
-      (blur)="onBlur()"
-      (focus)="onFocus()"
-      [maxlength]="maxlength"
-    />
+
+    <!-- When type = any-other -->
+    <div *ngSwitchDefault>
+      <!-- When modelChangesOnEveryKeystroke = true -->
+      <input
+        #input
+        kf-text
+        *ngIf="modelChangesOnEveryKeystroke"
+        [disabled]="disabled"
+        [placeholder]="placeholder || ''"
+        [type]="type"
+        [(ngModel)]="value"
+        [ngClass]="getStyle()"
+        (blur)="onBlur()"
+        (focus)="onFocus()"
+        [maxlength]="maxlength"
+      />
+      
+      <!-- When modelChangesOnEveryKeystroke = false -->
+      <input
+        #input
+        type="text"
+        *ngIf="!modelChangesOnEveryKeystroke"
+        [disabled]="disabled"
+        [placeholder]="placeholder || ''"
+        [value]="value"
+        [ngClass]="getStyle()"
+        (blur)="onBlur($event)"
+        (focus)="onFocus()"
+      >
+    </div>
 </div>
 
 <kf-icon icon="date-picker" color="primary" *ngIf="type === 'date'"></kf-icon>

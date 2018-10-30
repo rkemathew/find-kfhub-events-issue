@@ -1,11 +1,11 @@
 import {
     Component, ElementRef, forwardRef, Input, OnChanges, OnInit, SimpleChanges,
-    Renderer2, ViewChild, HostBinding, Optional, Host, SkipSelf, Output, EventEmitter,
+    Renderer2, ViewChild, HostBinding, Optional, Host, SkipSelf, Output, EventEmitter, DoCheck, NgZone, OnDestroy, AfterViewInit,
 } from '@angular/core';
-import {
-    ControlContainer, ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR,
-} from '@angular/forms';
+import { ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as _moment from 'moment-timezone';
+import { Subscription } from 'rxjs/Subscription';
+import { fromEvent } from 'rxjs/observable/fromEvent';
 
 const moment = _moment;
 
@@ -19,19 +19,18 @@ const moment = _moment;
         multi: true,
     }],
 })
-export class KfInputComponent implements OnInit, OnChanges, ControlValueAccessor {
+export class KfInputComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, DoCheck, AfterViewInit {
     private _control: any;
     private _errors: any;
     private _value: any = null;
     control: any;
     public showCalendar = false;
     public displayDate = '';
+    private _subs$: Subscription[] = [];
 
     @HostBinding('class.kf-input-size-lg') get islg(): boolean {
         return this.size === 'lg';
     }
-    @ViewChild('input') input: ElementRef;
-    @ViewChild('textarea') textarea: any; // not element ref because of kf-text HostBinding
     @Input() formControlName: string = null;
     @Input() disabled = false;
     @Input() label: string = null;
@@ -47,6 +46,10 @@ export class KfInputComponent implements OnInit, OnChanges, ControlValueAccessor
     @Input() markTouched = false;
     @Input() rows = 2;
     @Input() grow = false;
+    @Input() modelChangesOnEveryKeystroke = false;
+
+    @ViewChild('input') input: ElementRef;
+    @ViewChild('textarea') textarea: any; // not element ref because of kf-text HostBinding
 
     errorKeys: string[];
 
@@ -86,6 +89,7 @@ export class KfInputComponent implements OnInit, OnChanges, ControlValueAccessor
         private _renderer: Renderer2,
         @Optional() @Host() @SkipSelf()
         private _container: ControlContainer,
+        private _zone: NgZone,
     ) { }
 
     ngOnInit() {
@@ -94,27 +98,47 @@ export class KfInputComponent implements OnInit, OnChanges, ControlValueAccessor
         }
     }
 
-    ngOnChanges(changes: SimpleChanges) {}
+    ngOnDestroy() {
+        this._subs$.forEach(sub => sub.unsubscribe());
+    }
+
+    ngAfterViewInit() {
+        this.subscribeToInput();
+    }
+
+    ngOnChanges(changes: SimpleChanges) {
+        console.log('In ngOnChanges of kf-input');
+    }
+
+    ngDoCheck() {
+        console.log('In ngDoCheck of kf-input');
+    }
 
     writeValue(value: any): void {
         this.value = value;
         this._renderer.setProperty(this._elementRef.nativeElement, 'value', value);
     }
+
     registerOnChange(fn: (_: any) => void): void {
         this._onChange = fn;
     }
+
     registerOnTouched(fn: any): void {
         this._onTouched = fn;
     }
+
     setDisabledState(isDisabled: boolean): void {
         this._renderer.setProperty(this._elementRef.nativeElement, 'disabled', isDisabled);
         this.disabled = isDisabled;
     }
 
-    public onBlur(): void {
-        this._onTouched();
-        this.touched = true;
-        this.value = this.value.trim();
+    public onBlur(event=null): void {
+        if (this.modelChangesOnEveryKeystroke) {
+            this.value = this.value.trim();
+        } else {
+            this.value = (event && event.target && event.target.value) ?
+                event.target.value.trim(): this.value.trim();
+        }
     }
 
     public onFocus(): void {
@@ -149,5 +173,21 @@ export class KfInputComponent implements OnInit, OnChanges, ControlValueAccessor
         if (grow && elem.scrollHeight > elem.clientHeight) {
             this.rows = this.rows * 1 + 1;
         }
+    }
+
+    subscribeToInput() {
+        let sub$: Subscription;
+
+        // if (!this.input || (this.input && !this.input.nativeElement)) {
+        //     this.input = this._renderer.selectRootElement('#input1');
+        // }
+
+        this._zone.runOutsideAngular(() => {
+            sub$ = fromEvent(this.input.nativeElement, 'keyup').subscribe(e => {
+                console.log('Skipping Change Detection', e);
+            });
+        });
+
+        this._subs$.push(sub$);
     }
 }
