@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
@@ -6,7 +6,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements DoCheck {
     title = 'app';
     someBindingInput = ''
     someBindingTextArea = ''
@@ -26,6 +26,10 @@ export class AppComponent {
         this.previewForm = formBuilder.group({
             input: '',
         });
+    }
+
+    ngDoCheck() {
+        console.log('AppComponent ngDoCheck() fired');
     }
 
     onSomeBindingTextAreaChange(event) {
