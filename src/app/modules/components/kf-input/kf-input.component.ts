@@ -1,6 +1,6 @@
 import {
-    Component, ElementRef, forwardRef, Input, OnChanges, OnInit, SimpleChanges,
-    Renderer2, ViewChild, HostBinding, Optional, Host, SkipSelf, Output, EventEmitter, DoCheck, NgZone, OnDestroy, AfterViewInit,
+    Component, ElementRef, forwardRef, Input, OnInit, Renderer2, ViewChild, HostBinding, Optional,
+    Host, SkipSelf, Output, EventEmitter, NgZone, OnDestroy, AfterViewInit,
 } from '@angular/core';
 import { ControlContainer, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as _moment from 'moment-timezone';
@@ -19,7 +19,7 @@ const moment = _moment;
         multi: true,
     }],
 })
-export class KfInputComponent implements OnInit, OnChanges, OnDestroy, ControlValueAccessor, DoCheck, AfterViewInit {
+export class KfInputComponent implements OnInit, OnDestroy, ControlValueAccessor, AfterViewInit {
     private _control: any;
     private _errors: any;
     private _value: any = null;
@@ -103,15 +103,15 @@ export class KfInputComponent implements OnInit, OnChanges, OnDestroy, ControlVa
     }
 
     ngAfterViewInit() {
-        this.subscribeToInput();
-    }
+        if (!this.modelChangesOnEveryKeystroke) {
+            if (this.input && this.input.nativeElement) {
+                this.subscribeToEvent(this.input.nativeElement, 'keyup');
+            }
 
-    ngOnChanges(changes: SimpleChanges) {
-        console.log('In ngOnChanges of kf-input');
-    }
-
-    ngDoCheck() {
-        console.log('In ngDoCheck of kf-input');
+            if (this.textarea && this.textarea.nativeElement) {
+                this.subscribeToEvent(this.textarea.nativeElement, 'keyup');
+            }
+        }
     }
 
     writeValue(value: any): void {
@@ -175,15 +175,11 @@ export class KfInputComponent implements OnInit, OnChanges, OnDestroy, ControlVa
         }
     }
 
-    subscribeToInput() {
+    subscribeToEvent(nativeElement: any, event: any) {
         let sub$: Subscription;
 
-        // if (!this.input || (this.input && !this.input.nativeElement)) {
-        //     this.input = this._renderer.selectRootElement('#input1');
-        // }
-
         this._zone.runOutsideAngular(() => {
-            sub$ = fromEvent(this.input.nativeElement, 'keyup').subscribe(e => {
+            sub$ = fromEvent(nativeElement, event).subscribe(e => {
                 console.log('Skipping Change Detection', e);
             });
         });

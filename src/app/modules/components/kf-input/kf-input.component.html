@@ -4,7 +4,6 @@
     <div *ngSwitchCase="'textarea'">
       <!-- When modelChangesOnEveryKeystroke = true -->
       <textarea
-        #textarea
         kf-text
         *ngIf="modelChangesOnEveryKeystroke"
         [style.resize]="resize"
@@ -19,13 +18,11 @@
 
       <!-- When modelChangesOnEveryKeystroke = false -->
       <textarea
-        #textarea
         kf-text
         *ngIf="!modelChangesOnEveryKeystroke"
         [style.resize]="resize"
-        [ngModel]="value"
+        [value]="value"
         (blur)="onBlur($event)"
-        [maxlength]="maxlength"
         [disabled]="disabled"
         [placeholder]="placeholder || ''"
         [ngClass]="getStyle()"
@@ -35,7 +32,6 @@
 
     <!-- When type = date -->
     <input
-      #input
       kf-text
       class="date-input"
       *ngSwitchCase="'date'"
@@ -53,7 +49,6 @@
     <div *ngSwitchDefault>
       <!-- When modelChangesOnEveryKeystroke = true -->
       <input
-        #input
         kf-text
         *ngIf="modelChangesOnEveryKeystroke"
         [disabled]="disabled"
@@ -68,8 +63,8 @@
       
       <!-- When modelChangesOnEveryKeystroke = false -->
       <input
-        #input
         type="text"
+        kf-text
         *ngIf="!modelChangesOnEveryKeystroke"
         [disabled]="disabled"
         [placeholder]="placeholder || ''"

@@ -8,7 +8,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class AppComponent {
     title = 'app';
-    someBindingVariable = ''
+    someBindingInput = ''
+    someBindingTextArea = ''
 
     public customizeForm: FormGroup = null;
     public previewForm: FormGroup = null;
@@ -25,5 +26,9 @@ export class AppComponent {
         this.previewForm = formBuilder.group({
             input: '',
         });
+    }
+
+    onSomeBindingTextAreaChange(event) {
+        console.log('onSomeBindingTextAreaChange() fired', event);
     }
 }
